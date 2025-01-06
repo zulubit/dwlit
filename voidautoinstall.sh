@@ -25,8 +25,8 @@ sudo ln -s /etc/sv/elogind /var/service || error_exit "Failed to create elogind 
 sudo ln -s /etc/sv/bluetoothd /var/service || error_exit "Failed to create bluetoothd symlink."
 sudo ln -s /etc/sv/polkitd /var/service || error_exit "Failed to create polkitd symlink."
 
-# Build icede
-sudo make install clean || error_exit "Failed to build and install icede."
+# Build dwlit
+sudo make install clean || error_exit "Failed to build and install dwlit."
 
 # Make bar.sh and start.sh executable
 chmod +x ~/dwlit/scripts/bar.sh || error_exit "Failed to make bar.sh executable."
@@ -38,9 +38,9 @@ chmod +x installtheme.sh || error_exit "Failed to make installtheme.sh executabl
 ./installtheme.sh || error_exit "Failed to run installtheme.sh."
 
 # Add TTY1 auto-run configuration
-AUTO_RUN_CHECK='if [ "$(tty)" = "/dev/tty1" ]; then\n    ~/icede/start.sh\nfi'
+AUTO_RUN_CHECK='if [ "$(tty)" = "/dev/tty1" ]; then\n    ~/dwlit/start.sh\nfi'
 if ! grep -Fq "$AUTO_RUN_CHECK" ~/.bash_profile; then
-    echo -e "\n# Auto-run ~/icede/start.sh on TTY1\n$AUTO_RUN_CHECK" >> ~/.bash_profile || error_exit "Failed to set up TTY1 auto-run."
+    echo -e "\n# Auto-run ~/dwlit/start.sh on TTY1\n$AUTO_RUN_CHECK" >> ~/.bash_profile || error_exit "Failed to set up TTY1 auto-run."
 fi
 
 # Completion message
