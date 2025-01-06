@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Load colors from the imported theme
-. ~/dweasy/scripts/theme/tokynight
+. ~/dwlit/scripts/theme/theme
 
 # Start DBus session in the background
 dbus-launch --sh-syntax --exit-with-session &
@@ -17,6 +17,8 @@ export ELM_DISPLAY=wl
 export SDL_VIDEODRIVER=wayland
 export QT_QPA_PLATFORM=wayland-egl
 export XDG_SESSION_TYPE=xwayland
+export MOZ_ENABLE_WAYLAND=1
+export GDK_BACKEND=wayland
 
 # Add Flatpak executables to the PATH for wmenu to detect
 export PATH="$PATH:$HOME/.local/bin:/var/lib/flatpak/exports/bin"
@@ -32,8 +34,8 @@ dbus-run-session dwl -s "dwlb -ipc -tags 5 󰻽  󰈹  󰭹 \
     -urgent-fg-color $red -urgent-bg-color $red \
     -middle-bg-color $black -middle-bg-color-selected $black \
     -no-active-color-title -center-title -vertical-padding 3 -font 'Hack Nerd Font Mono:size=16'  & \
-    ~/dweasy/scripts/./bar.sh | dwlb -status-stdin all & \
-    swaybg -i ~/dweasy/Background/bg.jpg -m fill & \
+    ~/dwlit/scripts/./bar.sh | dwlb -status-stdin all & \
+    swaybg -i ~/dwlit/Background/bg.jpg -m fill & \
     pipewire & \
     wireplumber & \
     mako --background-color '#$black' \

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Load colors from the imported theme
-. ~/dweasy/scripts/theme/tokynight
+. ~/dwlit/scripts/theme/theme
 
 # Nerd Font Icons
 ICON_TIME=" 󱑃"      # Time icon
