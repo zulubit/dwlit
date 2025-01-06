@@ -6,10 +6,14 @@
 
 A script is included that fires all the build commands:
 
+If you havent already, clone the repository, install the dependencies and:
+
 ```bash
 cd ~/dwlit
 ./rebuild.sh
 ```
+
+whenever you change your **config.def.h** you should use the same script to rebuild.
 
 ## Starting:
 
@@ -20,13 +24,13 @@ cd
 ./dwlit/start.sh
 ```
 
-## Void (linux) autoinstall
+## Void (Linux) autoinstall
 
 If you'd like to have a full minimal setup a script is provided.
 
-This sctipt should only ever be used on a fresh network install of *Void (linux)*
+This sctipt should only ever be used on a fresh network install of *Void (Linux)*
 
-You should install *openssl* and *git* packages,
+You should install **openssl** and **git** packages,
 
 ```bash
 git clone https://github.com/zulubit/dwlit.git
@@ -107,4 +111,4 @@ dejaVu-fonts-ttf xorg-server-xwayland qt5-wayland qt6-wayland
 polkit polkit-elogind lxsession xdg-desktop-portal-wlr xdg-desktop-portal-gtk fcft fcft-devel
 ```
 
-Install these (and their `-devel` versions if your distro has separate development packages). The reference names of packages are from *voidlinux*
+Install these (and their `-devel` versions if your distro has separate development packages). The reference names of packages are from *Void (Linux)*, if you're using a different distro, these packages are surely available so make sure to look up their names if instaling referenced ones fails.
