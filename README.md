@@ -26,11 +26,25 @@ cd
 ./dwlit/start.sh
 ```
 
+## Apply theme and fonts
+
+There is a script provided to install the *Nord GTK theme* and *Hack Nerd Font* 
+
+```bash
+cd ~/dwlit
+chmod +x installtheme.sh
+./installtheme.sh
+```
+
 ## Void (Linux) autoinstall
 
 If you'd like to have a full minimal setup a script is provided.
 
+**This script automatically does all the steps described above**
+
 This sctipt should only ever be used on a fresh network install of *Void (Linux)*
+
+The script will update the system.
 
 You should install **openssl** and **git** packages,
 
