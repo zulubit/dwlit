@@ -57,6 +57,14 @@ sudo reboot
 
 you'll probably be asked fo your users password a couple of times so pay some attention.
 
+## Importand bindings:
+
+- **logo + enter** - open terminal
+- **logo + p** - open menu
+- **logo + shift + Q** - kill focused
+
+the rest shloud be looked up in **~/dwlit/config.def.h**. It's advisable to be familiar with the entire file.
+
 ## Dependencies:
 
 References copied from:
@@ -109,7 +117,7 @@ base-devel base-system make gcc git curl wget elogind light
 
 #### Wayland and Related
 ```bash
-Waybar swaylock swaybg wl-clipboard wlroots-devel wlroots0.18 wlroots0.18-devel wlroots0.18-devel
+swaylock swaybg wl-clipboard wlroots-devel wlroots0.18 wlroots0.18-devel wlroots0.18-devel
 ```
 
 #### Audio and Video
