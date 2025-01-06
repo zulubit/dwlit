@@ -37,12 +37,6 @@ chmod +x rebuild.sh || error_exit "Failed to make rebuild.sh executable."
 chmod +x installtheme.sh || error_exit "Failed to make installtheme.sh executable."
 ./installtheme.sh || error_exit "Failed to run installtheme.sh."
 
-# Add TTY1 auto-run configuration
-AUTO_RUN_CHECK='if [ "$(tty)" = "/dev/tty1" ]; then\n    ~/dwlit/start.sh\nfi'
-if ! grep -Fq "$AUTO_RUN_CHECK" ~/.bash_profile; then
-    echo -e "\n# Auto-run ~/dwlit/start.sh on TTY1\n$AUTO_RUN_CHECK" >> ~/.bash_profile || error_exit "Failed to set up TTY1 auto-run."
-fi
-
 # Completion message
 echo "You should 'sudo reboot' your system, then you can use './dwlit/start' after logging back in. you can start a terminal using windows_log + return when in a session and run 'ice' to get some usefull info. Your network connection is disabled, use 'nmtui' in the terminal to reconnect"
 
