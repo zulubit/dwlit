@@ -7,10 +7,10 @@
 static const int sloppyfocus               = 1;  /* focus follows mouse */
 static const int bypass_surface_visibility = 0;  /* 1 means idle inhibitors will disable idle tracking even if it's surface isn't visible  */
 static const unsigned int borderpx         = 1;  /* border pixel of windows */
-static const float rootcolor[]             = COLOR(0x222222ff);
-static const float bordercolor[]           = COLOR(0x444444ff);
-static const float focuscolor[]            = COLOR(0x005577ff);
-static const float urgentcolor[]           = COLOR(0xff0000ff);
+static const float rootcolor[]             = COLOR(0x2e3440ff); // Dark Nordic background
+static const float bordercolor[]           = COLOR(0x2e3440ff); // Nordic dark
+static const float focuscolor[]            = COLOR(0x81a1c1ff); // Nordic blue
+static const float urgentcolor[]           = COLOR(0xbf616aff); // Nordic red
 /* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
 static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You can also use glsl colors */
 
@@ -24,7 +24,6 @@ static int log_level = WLR_ERROR;
 static const Rule rules[] = {
 	/* app_id             title       tags mask     isfloating   monitor */
 	/* examples: */
-	{ "Gimp_EXAMPLE",     NULL,       0,            1,           -1 }, /* Start on currently visible tags floating, not tiled */
 	{ "firefox_EXAMPLE",  NULL,       1 << 8,       0,           -1 }, /* Start on ONLY tag "9" */
 };
 
@@ -119,7 +118,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot", "-f", "Hack Nerd Font Mono:size=12", "-o", "include=/usr/share/foot/themes/tokyonight-night", NULL };
+static const char *termcmd[] = { "foot", "-f", "Hack Nerd Font:size=12", "-o", "include=/usr/share/foot/themes/nord", "-o", "colors.alpha=0.98", NULL };
 
 static const char *menucmd[] = {
     "wmenu-run",
@@ -127,12 +126,12 @@ static const char *menucmd[] = {
     "-i",                 // Case-insensitive matching
     "-p", "Run: ",        // Prompt text "Run: "
     "-f", "Nerd 14",      // Use the "Nerd" font at size 14
-    "-N", "1E1E2E",       // Normal background color (Tokynight Night)
-    "-n", "D1D3D8",       // Normal foreground color (Tokynight Night)
-    "-M", "3B3C42",       // Prompt background color (Tokynight Night)
-    "-m", "A3A5B0",       // Prompt foreground color (Tokynight Night)
-    "-S", "6C6F78",       // Selection background color (Tokynight Night)
-    "-s", "F2F4F8",       // Selection foreground color (Tokynight Night)
+    "-N", "2E3440",       // Normal background color (Nordic dark)
+    "-n", "E5E9F0",       // Normal foreground color (Nordic white)
+    "-M", "A3BE8C",       // Prompt background color (Nordic green)
+    "-m", "2E3440",       // Prompt foreground color (Nordic white)
+    "-S", "A3BE8C",       // Selection background color (Nordic green)
+    "-s", "2E3440",       // Selection foreground color (Nordic white)
     NULL
 };
 

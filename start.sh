@@ -31,14 +31,14 @@ dbus-run-session dwl -s "dwlb -ipc -tags 5 󰻽  󰈹  󰭹 \
     -inactive-fg-color $white -inactive-bg-color $black \
     -urgent-fg-color $red -urgent-bg-color $red \
     -middle-bg-color $black -middle-bg-color-selected $black \
-    -no-active-color-title -center-title & \
+    -no-active-color-title -center-title -vertical-padding 3 -font 'Hack Nerd Font Mono:size=16'  & \
     ~/dweasy/scripts/./bar.sh | dwlb -status-stdin all & \
     swaybg -i ~/dweasy/Background/bg.jpg -m fill & \
     pipewire & \
     wireplumber & \
-    mako --background-color #$black \
-         --text-color #$white \
-         --border-color #$darkblue \
+    mako --background-color '#$black' \
+         --text-color '#$white' \
+         --border-color '#$darkblue' \
          --border-size 2 \
          --font 'Hack Nerd Font Mono 12' \
          --icons 1 \

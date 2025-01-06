@@ -2,10 +2,10 @@
 
 # colors
 
-black=1a1b26
-green=9ece6a
-white=a9b1d6
-grey=24283b
-blue=7aa2f7
-red=f7768e
+black=2e3440
+green=a3be8c
+white=e5e9f0
+grey=4c566a
+blue=81a1c1
+red=bf616a
 darkblue=$blue
