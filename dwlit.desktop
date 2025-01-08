@@ -1,0 +1,8 @@
+[Desktop Entry]
+# The file should be placed in /usr/share/wayland-sessions/
+# You can copy it there with: 
+# sudo cp ~/dwlit/dwlit.desktop /usr/share/wayland-sessions/
+Name=dwlit
+Exec=~/dwlit/start.sh
+Type=Application
+

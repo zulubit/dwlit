@@ -33,7 +33,7 @@ dbus-run-session dwl -s "dwlb -ipc -tags 5 󰻽  󰈹  󰭹 \
     -inactive-fg-color $white -inactive-bg-color $black \
     -urgent-fg-color $red -urgent-bg-color $red \
     -middle-bg-color $black -middle-bg-color-selected $black \
-    -no-active-color-title -center-title -vertical-padding 3 -font 'Hack Nerd Font Mono:size=16'  & \
+    -no-active-color-title -center-title -vertical-padding 3 -font 'Hack Nerd Font Mono:size=16' -scale 2 & \
     ~/dwlit/scripts/./bar.sh | dwlb -status-stdin all & \
     swaybg -i ~/dwlit/Background/bg.jpg -m fill & \
     pipewire & \

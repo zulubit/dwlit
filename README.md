@@ -17,6 +17,13 @@ cd ~/dwlit
 
 whenever you change your **config.def.h** you should use the same script to rebuild.
 
+if you decide to do changes to **config.h** directly you should just run
+
+```bash
+cd ~/dwlit
+sudo make install clean
+```
+
 ## Starting:
 
 there is a script you should use to start dwlit
