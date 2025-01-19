@@ -72,6 +72,12 @@ you'll probably be asked fo your users password a couple of times so pay some at
 
 the rest shloud be looked up in **~/dwlit/config.def.h**. It's advisable to be familiar with the entire file.
 
+## Misc:
+
+To get a better flatpak experience you should probably install **Flatseal** from flathub and enable wayland support globally
+
+To make use of the power button binding you should disable the default button behaviour in **logind.conf** bt setting "HandlePowerKey" to "ignore"
+
 ## Dependencies:
 
 References copied from:
@@ -104,7 +110,7 @@ These dependencies are required by DWLit but are not already listed in the DWL d
 
 #### Networking and Bluetooth
 ```bash
-NetworkManager blueman curl
+NetworkManager bluetuith curl
 ```
 
 #### File Management and Thumbnails
@@ -119,7 +125,7 @@ Mako vlc grim slurp swappy wf-recorder
 
 #### System Utilities
 ```bash
-base-devel base-system make gcc git curl wget elogind light
+base-devel base-system make gcc git curl wget elogind light wlogout
 ```
 
 #### Wayland and Related

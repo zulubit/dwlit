@@ -10,10 +10,11 @@ ICON_NET_CONNECTED=" " # Wi-Fi connected icon
 ICON_NET_DISCONNECTED=" 󱚼" # Wi-Fi disconnected icon
 ICON_VOLUME=" "     # Volume icon
 ICON_VOLUME_MUTED=" "  # Volume muted icon
+ICON_POWER="⏻"  # Volume muted icon
 
 # Function to get the current time
 get_time() {
-    echo "^fg($black)^bg($blue)$ICON_TIME ^bg() ^fg($white)$(date '+%H:%M:%S')"
+    echo "^fg($black)^bg($blue)$ICON_TIME ^bg() ^fg($white)$(date '+%B %d') - $(date '+%H:%M')"
 }
 
 # Function to get battery status and color
@@ -63,6 +64,10 @@ get_volume() {
     echo "^fg($black)^bg($VOLUME_BG_COLOR)$VOLUME_ICON ^bg() ^fg($white)$VOLUME_STATUS"
 }
 
+get_power(){
+    echo "^lm(wlogout)^fg($white) $ICON_POWER^lm()"
+}
+
 # Main loop
 while true; do
     # Get outputs from functions
@@ -70,9 +75,10 @@ while true; do
     BATTERY_OUTPUT=$(get_battery)
     NETWORK_OUTPUT=$(get_network)
     VOLUME_OUTPUT=$(get_volume)
+    POWER_OUTPUT=$(get_power)
 
     # Combine everything in the final output
-    echo "$BATTERY_OUTPUT $VOLUME_OUTPUT $TIME_OUTPUT $NETWORK_OUTPUT"
+    echo "$BATTERY_OUTPUT $VOLUME_OUTPUT $TIME_OUTPUT $NETWORK_OUTPUT$POWER_OUTPUT"
 
     sleep 1
 done

@@ -20,6 +20,9 @@ export XDG_SESSION_TYPE=xwayland
 export MOZ_ENABLE_WAYLAND=1
 export GDK_BACKEND=wayland
 
+# Stop the power key from shuting down the system without warning
+export HANDLE_POWER_KEY=ignore
+
 # Add Flatpak executables to the PATH for wmenu to detect
 export PATH="$PATH:$HOME/.local/bin:/var/lib/flatpak/exports/bin"
 

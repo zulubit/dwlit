@@ -237,6 +237,7 @@ static const Key keys[] = {
 	{0, XKB_KEY_XF86MonBrightnessUp, spawn, {.v = light_up}},     // Use XKB_KEY_XF86MonBrightnessUp
 	{0, XKB_KEY_XF86MonBrightnessDown, spawn, {.v = light_down}}, // Use XKB_KEY_XF86MonBrightnessDown
 	{0, XKB_KEY_XF86AudioMicMute, spawn, {.v = mutemic}},           // Use XKB_KEY_XF86AudioMicMute
+	{0, XKB_KEY_XF86PowerOff, spawn, {.v = (const char*[]){ "wlogout", NULL }} },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
