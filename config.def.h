@@ -26,7 +26,7 @@ static const uint32_t resize_interval_ms   = 16; /* Resize interval depends on f
 enum Direction { DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN };
 
 /* tagging - TAGCOUNT must be no greater than 31 */
-#define TAGCOUNT (5)
+#define TAGCOUNT (4)
 
 /* logging */
 static int log_level = WLR_ERROR;
@@ -223,11 +223,11 @@ static const Key keys[] = {
 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                         1),
 	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                 2),
 	TAGKEYS(          XKB_KEY_4, XKB_KEY_dollar,                     3),
-	TAGKEYS(          XKB_KEY_5, XKB_KEY_percent,                    4),
-	TAGKEYS(          XKB_KEY_6, XKB_KEY_asciicircum,                5),
-	TAGKEYS(          XKB_KEY_7, XKB_KEY_ampersand,                  6),
-	TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),
-	TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),
+	/*TAGKEYS(          XKB_KEY_5, XKB_KEY_percent,                    4),*/
+	/*TAGKEYS(          XKB_KEY_6, XKB_KEY_asciicircum,                5),*/
+	/*TAGKEYS(          XKB_KEY_7, XKB_KEY_ampersand,                  6),*/
+	/*TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),*/
+	/*TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),*/
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_E,          quit,           {0} },
 
 	{0, XKB_KEY_XF86AudioLowerVolume, spawn, {.v = downvol}},    // Use XKB_KEY_XF86AudioLowerVolume

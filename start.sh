@@ -30,7 +30,7 @@ export PATH="$PATH:$HOME/.local/bin:/var/lib/flatpak/exports/bin"
 light -S 50
 
 # Launch dwl with styling
-dbus-run-session dwl -s "dwlb -ipc -tags 5 󰻽  󰈹  󰭹 \
+dbus-run-session dwl -s "dwlb -ipc -tags 4 󰻽  󰈹 󰭹 \
     -active-fg-color $black -active-bg-color $green \
     -occupied-fg-color $white -occupied-bg-color $grey \
     -inactive-fg-color $white -inactive-bg-color $black \
