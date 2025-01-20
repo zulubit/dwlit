@@ -33,6 +33,8 @@ cd
 ./dwlit/start.sh
 ```
 
+before you start you should make sure all the scripts in **./scripts** are executable
+
 ## Apply theme and fonts
 
 There is a script provided to install the *Nord GTK theme* and *Hack Nerd Font* 
@@ -125,7 +127,7 @@ Mako vlc grim slurp swappy wf-recorder
 
 #### System Utilities
 ```bash
-base-devel base-system make gcc git curl wget elogind light wlogout
+base-devel base-system make gcc git curl wget elogind light
 ```
 
 #### Wayland and Related

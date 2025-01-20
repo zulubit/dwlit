@@ -10,7 +10,7 @@ error_exit() {
 sudo xbps-install -Syu || error_exit "Void failed to update befor starting the install"
 
 # Install all the packages
-sudo xbps-install -y NetworkManager Thunar tumbler gthumb base-devel base-system bluetuith curl mako elogind flatpak fcft polkit polkit-elogind lxsession void-repo-nonfree fcft-devel swaylock wlogout firefox foot gcc git libxml2-devel xdg-desktop-portal-wlr xdg-desktop-portal-gtk light make mesa-dri pamixer pavucontrol pipewire pulseaudio qt5-wayland qt6-wayland sof-firmware sof-tools swaybg wget wl-clipboard wlroots-devel wlroots0.18 wlroots0.18-devel wmenu dejavu-fonts-ttf xorg-server-xwayland grim slurp swappy vlc wf-recorder || error_exit "Package installation failed."
+sudo xbps-install -y NetworkManager Thunar tumbler gthumb base-devel base-system bluetuith curl mako elogind flatpak fcft polkit polkit-elogind lxsession void-repo-nonfree fcft-devel swaylock firefox foot gcc git libxml2-devel xdg-desktop-portal-wlr xdg-desktop-portal-gtk light make mesa-dri pamixer pavucontrol pipewire pulseaudio qt5-wayland qt6-wayland sof-firmware sof-tools swaybg wget wl-clipboard wlroots-devel wlroots0.18 wlroots0.18-devel wmenu dejavu-fonts-ttf xorg-server-xwayland grim slurp swappy vlc wf-recorder || error_exit "Package installation failed."
 
 # add flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -30,6 +30,7 @@ sudo make install clean || error_exit "Failed to build and install dwlit."
 
 # Make bar.sh and start.sh executable
 chmod +x ~/dwlit/scripts/bar.sh || error_exit "Failed to make bar.sh executable."
+chmod +x ~/dwlit/scripts/power.sh || error_exit "Failed to make power.sh executable."
 chmod +x start.sh || error_exit "Failed to make start.sh executable."
 chmod +x rebuild.sh || error_exit "Failed to make rebuild.sh executable."
 

@@ -135,10 +135,9 @@ static const char *termcmd[] = { "foot", "-f", "Hack Nerd Font:size=12", "-o", "
 
 static const char *menucmd[] = {
     "wmenu-run",
-    "-b",                 // Display at the bottom of the screen
     "-i",                 // Case-insensitive matching
     "-p", "Run: ",        // Prompt text "Run: "
-    "-f", "Nerd 14",      // Use the "Nerd" font at size 14
+    "-f", "Nerd 18",      // Use the "Nerd" font at size 14
     "-N", "2E3440",       // Normal background color (Nordic dark)
     "-n", "E5E9F0",       // Normal foreground color (Nordic white)
     "-M", "A3BE8C",       // Prompt background color (Nordic green)

@@ -65,7 +65,7 @@ get_volume() {
 }
 
 get_power(){
-    echo "^lm(wlogout)^fg($white) $ICON_POWER^lm()"
+    echo "^lm(~/dwlit/scripts/./power.sh)^fg($white) $ICON_POWER^lm()"
 }
 
 # Main loop
