@@ -149,9 +149,9 @@ static const char *menucmd[] = {
 
 static const char *swaylockcmd[] = {
     "swaylock",
-    "--color", "1e1e2ef8",        /* Background color with transparency (f8 = 97% opaque) */
-    "--ring-color", "81a1c1",     /* Ring color (Soft cyan) */
-    "--text-color", "d1d3d8",     /* Text color (Light grey) */
+    "--color", "2E3440f8",        /* Background color with transparency (f8 = 97% opaque) */
+    "--ring-color", "A3BE8C",     /* Ring color (Soft cyan) */
+    "--text-color", "2E3440",     /* Text color (Light grey) */
     NULL
 };
 

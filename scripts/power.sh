@@ -12,7 +12,7 @@ choice=$(echo "$options" | wmenu \
     -S "A3BE8C" -s "2E3440")
 
 # Define swaylock command
-SWAYLOCK="swaylock --color 1e1e2ef8 --ring-color 81a1c1 --text-color d1d3d8"
+SWAYLOCK="swaylock --color 2E3440f8 --ring-color A3BE8C --text-color 2E3440"
 
 # Handle the choice
 case $choice in
