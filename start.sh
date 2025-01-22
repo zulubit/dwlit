@@ -41,6 +41,7 @@ dbus-run-session dwl -s "dwlb -ipc -tags 4 󰻽  󰈹 󰭹 \
     swaybg -i ~/dwlit/Background/bg.jpg -m fill & \
     pipewire & \
     wireplumber & \
+    pipewire-pulse & \
     mako --background-color '#$black' \
          --text-color '#$white' \
          --border-color '#$darkblue' \

@@ -137,7 +137,7 @@ swaylock swaybg wl-clipboard wlroots-devel wlroots0.18 wlroots0.18-devel wlroots
 
 #### Audio and Video
 ```bash
-pipewire pulseaudio pamixer pavucontrol sof-firmware sof-tools
+pipewire pipewire-pulse pavucontrol sof-firmware sof-tools
 ```
 
 #### Fonts and XWayland Support
@@ -150,4 +150,4 @@ dejaVu-fonts-ttf xorg-server-xwayland qt5-wayland qt6-wayland
 polkit polkit-elogind lxsession xdg-desktop-portal-wlr xdg-desktop-portal-gtk fcft fcft-devel
 ```
 
-Install these (and their `-devel` versions if your distro has separate development packages). The reference names of packages are from *Void (Linux)*, if you're using a different distro, these packages are surely available so make sure to look up their names if instaling referenced ones fails.
+Install these. The reference names of packages are from *Void (Linux)*, if you're using a different distro, these packages are surely available so make sure to look up their names if instaling referenced ones fails.

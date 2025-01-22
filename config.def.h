@@ -136,6 +136,7 @@ static const char *termcmd[] = { "foot", "-f", "Hack Nerd Font:size=12", "-o", "
 static const char *menucmd[] = {
     "wmenu-run",
     "-i",                 // Case-insensitive matching
+    "-b",                 // Case-insensitive matching
     "-p", "Run: ",        // Prompt text "Run: "
     "-f", "Nerd 18",      // Use the "Nerd" font at size 14
     "-N", "2E3440",       // Normal background color (Nordic dark)
@@ -155,12 +156,24 @@ static const char *swaylockcmd[] = {
     NULL
 };
 
-static const char *upvol[] = { "/usr/bin/pamixer", "-i", "10", "--set-limit", "120", NULL };
-static const char *downvol[] = { "/usr/bin/pamixer", "-d", "10", "--set-limit", "120", NULL };
-static const char *mutevol[] = { "/usr/bin/pamixer", "--toggle-mute", NULL };
-static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL};
-static const char *light_down[] = {"/usr/bin/light", "-U", "5", NULL};
-static const char *mutemic[] = { "/usr/bin/pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL };
+
+static const char *upvol[] = {
+    "/bin/sh", "-c",
+    "VOLUME=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}' | cut -d. -f1); "
+    "if [ $VOLUME -lt 100 ]; then wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; fi",
+    NULL
+};
+
+static const char *downvol[] = {
+    "/bin/sh", "-c",
+    "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    NULL
+};
+
+static const char *mutevol[] = { "/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
+static const char *light_up[] = { "/usr/bin/light", "-A", "5", NULL };
+static const char *light_down[] = { "/usr/bin/light", "-U", "5", NULL };
+static const char *mutemic[] = { "/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SOURCE@", "toggle", NULL };
 /* For this to work ~/Pictures must exists */
 static const char *screenshotcmd[] = { 
     "/bin/sh", "-c", 
