@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=dwlit
-Comment=dwm for Wayland - dwlit spin
-Exec=sh -c "~/dwlit/./start.sh"
-Type=Application
