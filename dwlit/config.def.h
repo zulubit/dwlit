@@ -34,7 +34,7 @@ static uint32_t colors[][3]                = {
 };
 
 /* tagging - TAGCOUNT must be no greater than 31 */
-static char *tags[] = { "󰻽", " ", "󰈹", "󰭹" };
+static char *tags[] = { "󰻽", "", "󰈹", "󰭹" };
 #define TAGCOUNT (4)
 
 /* logging */
@@ -71,9 +71,8 @@ static const Rule rules[] = {
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "|w|",      btrtile },
-	{ "[]=",      tile },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
 
 /* monitors */
@@ -159,14 +158,72 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *termcmd[] = { "foot", NULL };
-static const char *menucmd[] = { "wmenu-run", NULL };
+static const char *termcmd[] = { "foot", "-f", "Hack Nerd Font:size=12", "-o", "include=/usr/share/foot/themes/nord", "-o", "colors.alpha=0.98", NULL };
+
+static const char *menucmd[] = {
+    "wmenu-run",
+    "-i",                 // Case-insensitive matching
+    "-b",                 // Case-insensitive matching
+    "-p", "Run: ",        // Prompt text "Run: "
+    "-f", "Nerd 18",      // Use the "Nerd" font at size 14
+    "-N", "2E3440",       // Normal background color (Nordic dark)
+    "-n", "E5E9F0",       // Normal foreground color (Nordic white)
+    "-M", "A3BE8C",       // Prompt background color (Nordic green)
+    "-m", "2E3440",       // Prompt foreground color (Nordic white)
+    "-S", "A3BE8C",       // Selection background color (Nordic green)
+    "-s", "2E3440",       // Selection foreground color (Nordic white)
+    NULL
+};
+
+static const char *swaylockcmd[] = {
+    "swaylock",
+    "--color", "2E3440f8",        /* Background color with transparency (f8 = 97% opaque) */
+    "--ring-color", "A3BE8C",     /* Ring color (Soft cyan) */
+    "--text-color", "2E3440",     /* Text color (Light grey) */
+    NULL
+};
+
+
+static const char *upvol[] = {
+    "/bin/sh", "-c",
+    "VOLUME=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}' | cut -d. -f1); "
+    "if [ $VOLUME -lt 100 ]; then wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; fi",
+    NULL
+};
+
+static const char *downvol[] = {
+    "/bin/sh", "-c",
+    "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    NULL
+};
+
+static const char *mutevol[] = { "/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
+static const char *light_up[] = { "/usr/bin/light", "-A", "5", NULL };
+static const char *light_down[] = { "/usr/bin/light", "-U", "5", NULL };
+static const char *mutemic[] = { "/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SOURCE@", "toggle", NULL };
+/* For this to work ~/Pictures must exists */
+static const char *screenshotcmd[] = { 
+    "/bin/sh", "-c", 
+    "mkdir -p ~/Pictures && grim -g \"$(slurp)\" - | swappy -f - -o ~/Pictures/edited-$(date +%Y%m%d%H%M%S).png", 
+    NULL 
+};
+
+static const char *recordcmd[] = { 
+    "foot", "-e", 
+    "sh", "-c", 
+    "wf-recorder -g \"$(slurp)\" -f ~/Pictures/recording-$(date +%Y%m%d%H%M%S).mp4", 
+    NULL 
+};
+
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: c -> C, 2 -> at, etc. */
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Return,     spawn,          {.v = termcmd} },
+	{ MODKEY,		     XKB_KEY_Return,     spawn,          {.v = termcmd} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_BackSpace,  spawn,          {.v = swaylockcmd} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_S,     	 spawn,          {.v = recordcmd} },
+	{ MODKEY,                    XKB_KEY_s,     	 spawn,          {.v = screenshotcmd} },
 	{ MODKEY,                    XKB_KEY_b,          togglebar,      {0} },
 	{ MODKEY,                    XKB_KEY_j,          focusstack,     {.i = +1} },
 	{ MODKEY,                    XKB_KEY_k,          focusstack,     {.i = -1} },
@@ -174,31 +231,16 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_l,          setmfact,       {.f = +0.05f} },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_h,          incgaps,       {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_l,          incgaps,       {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO|WLR_MODIFIER_SHIFT,   XKB_KEY_H,      incogaps,      {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO|WLR_MODIFIER_SHIFT,   XKB_KEY_L,      incogaps,      {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO|WLR_MODIFIER_CTRL,    XKB_KEY_h,      incigaps,      {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO|WLR_MODIFIER_CTRL,    XKB_KEY_l,      incigaps,      {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_0,          togglegaps,     {0} },
-	{ MODKEY|WLR_MODIFIER_LOGO|WLR_MODIFIER_SHIFT,   XKB_KEY_parenright,defaultgaps,    {0} },
-	{ MODKEY,                    XKB_KEY_y,          incihgaps,     {.i = +1 } },
-	{ MODKEY,                    XKB_KEY_o,          incihgaps,     {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_y,          incivgaps,     {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_o,          incivgaps,     {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_y,          incohgaps,     {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_LOGO,  XKB_KEY_o,          incohgaps,     {.i = -1 } },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Y,          incovgaps,     {.i = +1 } },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_O,          incovgaps,     {.i = -1 } },
-	{ MODKEY,                    XKB_KEY_Return,     zoom,           {0} },
+	{ MODKEY,                    XKB_KEY_z,          zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_C,          killclient,     {0} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          killclient,     {0} },
 	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
-	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
+	{ MODKEY,                    XKB_KEY_e,          togglefullscreen, {0} },
+	{ MODKEY,		     XKB_KEY_g,          togglegaps,     {0} },
 	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
 	{ MODKEY,                    XKB_KEY_comma,      focusmon,       {.i = WLR_DIRECTION_LEFT} },
@@ -217,14 +259,20 @@ static const Key keys[] = {
 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                         1),
 	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                 2),
 	TAGKEYS(          XKB_KEY_4, XKB_KEY_dollar,                     3),
-	TAGKEYS(          XKB_KEY_5, XKB_KEY_percent,                    4),
-	TAGKEYS(          XKB_KEY_6, XKB_KEY_asciicircum,                5),
-	TAGKEYS(          XKB_KEY_7, XKB_KEY_ampersand,                  6),
-	TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),
-	TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          quit,           {0} },
+	/*TAGKEYS(          XKB_KEY_5, XKB_KEY_percent,                    4),*/
+	/*TAGKEYS(          XKB_KEY_6, XKB_KEY_asciicircum,                5),*/
+	/*TAGKEYS(          XKB_KEY_7, XKB_KEY_ampersand,                  6),*/
+	/*TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),*/
+	/*TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),*/
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_E,          quit,           {0} },
 
-	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
+	{0, XKB_KEY_XF86AudioLowerVolume, spawn, {.v = downvol}},    // Use XKB_KEY_XF86AudioLowerVolume
+	{0, XKB_KEY_XF86AudioMute, spawn, {.v = mutevol}},            // Use XKB_KEY_XF86AudioMute
+	{0, XKB_KEY_XF86AudioRaiseVolume, spawn, {.v = upvol}},       // Use XKB_KEY_XF86AudioRaiseVolume
+	{0, XKB_KEY_XF86MonBrightnessUp, spawn, {.v = light_up}},     // Use XKB_KEY_XF86MonBrightnessUp
+	{0, XKB_KEY_XF86MonBrightnessDown, spawn, {.v = light_down}}, // Use XKB_KEY_XF86MonBrightnessDown
+	{0, XKB_KEY_XF86AudioMicMute, spawn, {.v = mutemic}},           // Use XKB_KEY_XF86AudioMicMute
+	{0, XKB_KEY_XF86PowerOff, spawn, {.v = (const char*[]){ "wlogout", NULL }} },	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
 	/* Ctrl-Alt-Fx is used to switch to another VT, if you don't know what a VT is
 	 * do not remove them.
