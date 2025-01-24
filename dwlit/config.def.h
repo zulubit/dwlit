@@ -17,20 +17,19 @@ static const int showbar                   = 1; /* 0 means no bar */
 static const int topbar                    = 1; /* 0 means bottom bar */
 static const int vertpad                   = 10; /* vertical padding of bar */
 static const int sidepad                   = 10; /* horizontal padding of bar */
-static const char *fonts[]                 = {"monospace:size=10"};
-static const float rootcolor[]             = COLOR(0x000000ff);
-/* This conforms to the xdg-protocol. Set the alpha to zero to restore the old behavior */
-static const float fullscreen_bg[]         = {0.1f, 0.1f, 0.1f, 1.0f}; /* You can also use glsl colors */
-static const float resize_factor           = 0.0002f; /* Resize multiplier for mouse resizing, depends on mouse sensivity. */
-static const uint32_t resize_interval_ms   = 16; /* Resize interval depends on framerate and screen refresh rate. */
- 
+static const char *fonts[]                 = {"Hack Nerd Font Mono:size=12"};
+static const float rootcolor[]             = COLOR(0x2e3440ff);  // Background color (Nord dark gray)
+static const float fullscreen_bg[]         = {0.18f, 0.20f, 0.25f, 0.5f}; // 50% transparent dark gray (Nord)
+static const float resize_factor           = 0.0002f;
+static const uint32_t resize_interval_ms   = 16;
+
 enum Direction { DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN };
 
 static uint32_t colors[][3]                = {
-	/*               fg          bg          border    */
-	[SchemeNorm] = { 0xbbbbbbff, 0x222222ff, 0x444444ff },
-	[SchemeSel]  = { 0xeeeeeeff, 0x005577ff, 0x005577ff },
-	[SchemeUrg]  = { 0,          0,          0x770000ff },
+    /*               fg          bg          border    */
+    [SchemeNorm] = { 0xe5e9f0ff, 0x2e344080, 0x4c566aff },  // Green text, dark gray with 50% transparency, bluish border
+    [SchemeSel]  = { 0xe5e9f0ff, 0x5e81ac80, 0xd8dee9b3 },  // Nord light gray, lighter gray with 50% transparency, matching border
+    [SchemeUrg]  = { 0xe5e9f0ff, 0x2e3440b3, 0xd08770ff },  // Nord light gray, dark gray with 70% transparency, orange border for urgent
 };
 
 /* tagging - TAGCOUNT must be no greater than 31 */
@@ -165,7 +164,7 @@ static const char *menucmd[] = {
     "-i",                 // Case-insensitive matching
     "-b",                 // Case-insensitive matching
     "-p", "Run: ",        // Prompt text "Run: "
-    "-f", "Nerd 18",      // Use the "Nerd" font at size 14
+    "-f", "Nerd 12",      // Use the "Nerd" font at size 14
     "-N", "2E3440",       // Normal background color (Nordic dark)
     "-n", "E5E9F0",       // Normal foreground color (Nordic white)
     "-M", "A3BE8C",       // Prompt background color (Nordic green)
