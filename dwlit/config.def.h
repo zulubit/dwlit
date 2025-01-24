@@ -11,8 +11,8 @@ static const int smartgaps                 = 0;  /* 1 means no outer gap when th
 static const int monoclegaps               = 0;  /* 1 means outer gaps in monocle layout */
 static const unsigned int gappih           = 10; /* horiz inner gap between windows */
 static const unsigned int gappiv           = 10; /* vert inner gap between windows */
-static const unsigned int gappoh           = 10; /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov           = 10; /* vert outer gap between windows and screen edge */
+static const unsigned int gappoh           = 0; /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov           = 0; /* vert outer gap between windows and screen edge */
 static const int showbar                   = 1; /* 0 means no bar */
 static const int topbar                    = 1; /* 0 means bottom bar */
 static const int vertpad                   = 10; /* vertical padding of bar */
@@ -34,17 +34,29 @@ static uint32_t colors[][3]                = {
 };
 
 /* tagging - TAGCOUNT must be no greater than 31 */
-static char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-#define TAGCOUNT (9)
+static char *tags[] = { "󰻽", " ", "󰈹", "󰭹" };
+#define TAGCOUNT (4)
 
 /* logging */
 static int log_level = WLR_ERROR;
 
 /* Autostart */
+/* Autostart */
 static const char *const autostart[] = {
-        "wbg", "/path/to/your/image", NULL,
-        NULL /* terminate */
+    "sh", "-c", "export GTK_THEME='Nordic'; export GTK2_RC_FILES='$HOME/.themes/Nordic/gtk-2.0/gtkrc'; \
+                 export ELM_DISPLAY=wl; export SDL_VIDEODRIVER=wayland; export QT_QPA_PLATFORM=wayland-egl; \
+                 export XDG_SESSION_TYPE=xwayland; export MOZ_ENABLE_WAYLAND=1; export GDK_BACKEND=wayland; \
+                 export HANDLE_POWER_KEY=ignore; export PATH=\"$PATH:$HOME/.local/bin:/var/lib/flatpak/exports/bin\";", NULL,
+    "sh", "-c", "light -S 50;", NULL,
+    "sh", "-c", "swaybg -i ~/dwlit/Background/bg.jpg -m fill", NULL,
+    "sh", "-c", "pipewire", NULL,
+    "sh", "-c", "wireplumber", NULL,
+    "sh", "-c", "pipewire-pulse", NULL,
+    "sh", "-c", "mako --background-color '#000000' --text-color '#ffffff' --border-color '#00008b' --border-size 2 --font 'Hack Nerd Font Mono 12' --icons 1 --max-icon-size 64", NULL,
+    "sh", "-c", "lxpolkit", NULL,
+    NULL /* terminate */
 };
+
 
 
 /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
