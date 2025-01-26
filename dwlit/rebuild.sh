@@ -1,7 +1,12 @@
 #!/bin/sh
 
-rm -rf subprojects build config.h
-cp -r subprojects_t subprojects
+set -e
+
+rm -rf build config.h
+
+# This can be uncommented to rebuild dependencies as well
+# rm -rf subprojects build config.h
+# cp -r subprojects_t subprojects
 
 meson setup -Dwlroots:xwayland=enabled build
 
