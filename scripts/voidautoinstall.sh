@@ -10,7 +10,7 @@ error_exit() {
 sudo xbps-install -Syu || error_exit "Void failed to update befor starting the install"
 
 # Install all the packages
-sudo xbps-install -y NetworkManager Thunar tumbler gthumb base-devel base-system bluetuith curl mako elogind flatpak fcft polkit polkit-elogind lxsession void-repo-nonfree fcft-devel swaylock firefox foot gcc git libxml2-devel xdg-desktop-portal-wlr xdg-desktop-portal-gtk light make mesa-dri pavucontrol pipewire qt5-wayland qt6-wayland sof-firmware sof-tools swaybg wget wl-clipboard wlroots-devel wlroots0.18 wlroots0.18-devel wmenu dejavu-fonts-ttf xorg-server-xwayland grim slurp swappy vlc wf-recorder || error_exit "Package installation failed."
+sudo xbps-install -y NetworkManager Thunar tumbler gthumb meson base-devel base-system bluetuith curl mako elogind flatpak fcft polkit polkit-elogind lxsession void-repo-nonfree fcft-devel swaylock firefox foot gcc git libxml2-devel xdg-desktop-portal-wlr xdg-desktop-portal-gtk light make mesa-dri pavucontrol pipewire qt5-wayland qt6-wayland sof-firmware sof-tools swaybg wget wl-clipboard wlroots-devel wlroots0.18 wlroots0.18-devel wmenu dejavu-fonts-ttf xorg-server-xwayland grim slurp swappy vlc wf-recorder || error_exit "Package installation failed."
 
 # add flathub
 sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
