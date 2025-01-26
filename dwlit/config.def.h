@@ -35,7 +35,6 @@ static uint32_t colors[][3]                = {
 
 /* tagging - TAGCOUNT must be no greater than 31 */
 static char *tags[] = { "󰻽", "", "󰈹", "󰭹" };
-#define TAGCOUNT (4)
 
 /* logging */
 static int log_level = WLR_ERROR;
@@ -79,6 +78,7 @@ static const Rule rules[] = {
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "|w|",      btrtile },
+	{ "[]=",      tile },
 	{ "[M]",      monocle },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 };
@@ -243,8 +243,9 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          killclient,     {0} },
 	{ MODKEY,                    XKB_KEY_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_T,          setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                    XKB_KEY_f,          setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
 	{ MODKEY,                    XKB_KEY_e,          togglefullscreen, {0} },

@@ -1599,7 +1599,7 @@ destroynotify(struct wl_listener *listener, void *data)
 	/* We check if the destroyed client was part of any tiled_list, to catch
 	 * client removals even if they would not be currently managed by btrtile */
 	if (selmon && selmon->tree_layout) {
-		for (int i = 0; i < TAGCOUNT; i++) {
+		for (int i = 0; i < LENGTH(tags); i++) {
 			remove_client(selmon, c,
 		 &selmon->tree_layout->root[i],
 		 &selmon->tree_layout->tiled_clients[i]);

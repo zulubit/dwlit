@@ -26,8 +26,8 @@ typedef struct LayoutNode {
 } LayoutNode;
 
 struct TreeLayout {
-	LayoutNode *root[TAGCOUNT + 1];
-	struct wl_list tiled_clients[TAGCOUNT + 1];
+	LayoutNode *root[LENGTH(tags) + 1];
+	struct wl_list tiled_clients[LENGTH(tags) + 1];
 };
 
 static void add_client_to_tiled_list(Client *c, struct wl_list *tiled_clients);
@@ -272,7 +272,7 @@ destroy_tree_layout(Monitor *m)
 {
 	if (!m)
 		return;
-	for (int i = 0; i <= TAGCOUNT; i++) {
+	for (int i = 0; i <= LENGTH(tags); i++) {
 		destroy_node_tree(m->tree_layout->root[i]);
 	}
 }
@@ -411,7 +411,7 @@ get_current_tag(Monitor *m)
 		return 0;
 
 	active = m->tagset[m->seltags];
-	for (int i = 0; i < TAGCOUNT; i++) {
+	for (int i = 0; i < LENGTH(tags); i++) {
 		if (active & (1u << i))
 			return i;
 	}
@@ -424,7 +424,7 @@ init_tree_layout(Monitor *m)
 	if (!m)
 		return;
 	m->tree_layout = calloc(1, sizeof(TreeLayout));
-	for (int i = 0; i <= TAGCOUNT; i++) {
+	for (int i = 0; i <= LENGTH(tags); i++) {
 		m->tree_layout->root[i] = NULL;
 		wl_list_init(&m->tree_layout->tiled_clients[i]);
 	}
