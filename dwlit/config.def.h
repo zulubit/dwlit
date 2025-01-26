@@ -40,23 +40,16 @@ static char *tags[] = { "󰻽", "", "󰈹", "󰭹" };
 static int log_level = WLR_ERROR;
 
 /* Autostart */
-/* Autostart */
 static const char *const autostart[] = {
-    "sh", "-c", "export GTK_THEME='Nordic'; export GTK2_RC_FILES='$HOME/.themes/Nordic/gtk-2.0/gtkrc'; \
-                 export ELM_DISPLAY=wl; export SDL_VIDEODRIVER=wayland; export QT_QPA_PLATFORM=wayland-egl; \
-                 export XDG_SESSION_TYPE=xwayland; export MOZ_ENABLE_WAYLAND=1; export GDK_BACKEND=wayland; \
-                 export HANDLE_POWER_KEY=ignore; export PATH=\"$PATH:$HOME/.local/bin:/var/lib/flatpak/exports/bin\";", NULL,
-    "sh", "-c", "light -S 50;", NULL,
-    "sh", "-c", "swaybg -i ~/dwlit/Background/bg.jpg -m fill", NULL,
-    "sh", "-c", "pipewire", NULL,
-    "sh", "-c", "wireplumber", NULL,
-    "sh", "-c", "pipewire-pulse", NULL,
-    "sh", "-c", "mako --background-color '#000000' --text-color '#ffffff' --border-color '#00008b' --border-size 2 --font 'Hack Nerd Font Mono 12' --icons 1 --max-icon-size 64", NULL,
-    "sh", "-c", "lxpolkit", NULL,
+    "sh", "-c", "sleep 1; light -S 50", NULL, // Requires `sh -c` for proper argument parsing
+    "sh", "-c", "swaybg -i ~/dwlit/Background/bg.jpg -m fill", NULL, // Requires `sh -c` for tilde expansion
+    "sh", "-c", "mako --background-color '#2E3440' --text-color '#ECEFF4' --border-color '#BF616A' --border-size 2 --font 'Hack Nerd Font Mono 12' --icons 1 --max-icon-size 64", NULL,
+    "pipewire", NULL, // Can be run directly
+    "wireplumber", NULL, // Can be run directly
+    "pipewire-pulse", NULL, // Can be run directly
+    "lxpolkit", NULL, // Can be run directly
     NULL /* terminate */
 };
-
-
 
 /* NOTE: ALWAYS keep a rule declared even if you don't use rules (e.g leave at least one example) */
 static const Rule rules[] = {
