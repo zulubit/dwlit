@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/bash
 
 # Adapted from chadwm, thank you! https://github.com/siduck/chadwm
 

@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=dwlit
 Comment=dwm for Wayland
-Exec=/home/your-username/dwlit/dm.sh
+Exec=dwlit
 Type=Application

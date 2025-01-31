@@ -23,6 +23,7 @@ static const float rootcolor[]             = COLOR(0x2e3440ff);  // Background c
 static const float fullscreen_bg[]         = {0.18f, 0.20f, 0.25f, 0.5f}; // 50% transparent dark gray (Nord)
 static const float resize_factor           = 0.0002f;
 static const uint32_t resize_interval_ms   = 16;
+static const char *barshscript             = "~/dwlit/scripts/bar.sh";  // or "/path/to/script.sh" if using a script
 
 enum Direction { DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN };
 
@@ -59,9 +60,9 @@ static const char *const autostart[] = {
     "sh", "-c", "sleep 1; light -S 50", NULL, // Requires `sh -c` for proper argument parsing
     "sh", "-c", "swaybg -i ~/dwlit/Background/bg.jpg -m fill", NULL, // Requires `sh -c` for tilde expansion
     "sh", "-c", "mako --background-color '#2E3440' --text-color '#ECEFF4' --border-color '#BF616A' --border-size 2 --font 'Hack Nerd Font Mono 12' --icons 1 --max-icon-size 64", NULL,
-    "pipewire", NULL, // Can be run directly
-    "wireplumber", NULL, // Can be run directly
-    "pipewire-pulse", NULL, // Can be run directly
+    /*"pipewire", NULL, // Can be run directly*/
+    /*"wireplumber", NULL, // Can be run directly*/
+    /*"pipewire-pulse", NULL, // Can be run directly*/
     "lxpolkit", NULL, // Can be run directly
     NULL /* terminate */
 };
@@ -268,11 +269,11 @@ static const Key keys[] = {
 	TAGKEYS(          XKB_KEY_2, XKB_KEY_at,                         1),
 	TAGKEYS(          XKB_KEY_3, XKB_KEY_numbersign,                 2),
 	TAGKEYS(          XKB_KEY_4, XKB_KEY_dollar,                     3),
-	TAGKEYS(          XKB_KEY_5, XKB_KEY_percent,                    4),
-	TAGKEYS(          XKB_KEY_6, XKB_KEY_asciicircum,                5),
-	TAGKEYS(          XKB_KEY_7, XKB_KEY_ampersand,                  6),
-	TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),
-	TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),
+	/*TAGKEYS(          XKB_KEY_5, XKB_KEY_percent,                    4),*/
+	/*TAGKEYS(          XKB_KEY_6, XKB_KEY_asciicircum,                5),*/
+	/*TAGKEYS(          XKB_KEY_7, XKB_KEY_ampersand,                  6),*/
+	/*TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                   7),*/
+	/*TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                  8),*/
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_E,          quit,           {0} },
 
 	{0, XKB_KEY_XF86AudioLowerVolume, spawn, {.v = downvol}},    // Use XKB_KEY_XF86AudioLowerVolume

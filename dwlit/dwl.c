@@ -3318,26 +3318,64 @@ startdrag(struct wl_listener *listener, void *data)
 int
 statusin(int fd, unsigned int mask, void *data)
 {
-	char status[1024];
-	ssize_t n;
+    char status[1024];
+    ssize_t n;
 
-	if (mask & WL_EVENT_ERROR)
-		die("status in event error");
-	if (mask & WL_EVENT_HANGUP)
-		wl_event_source_remove(status_event_source);
+    if (mask & WL_EVENT_ERROR)
+        die("status in event error");
+    if (mask & WL_EVENT_HANGUP)
+        wl_event_source_remove(status_event_source);
 
-	n = read(fd, status, sizeof(status) - 1);
-	if (n < 0 && errno != EWOULDBLOCK)
-		die("read:");
+    n = read(fd, status, sizeof(status) - 1);
+    if (n < 0 && errno != EWOULDBLOCK)
+        die("read:");
 
-	status[n] = '\0';
-	status[strcspn(status, "\n")] = '\0';
+    status[n] = '\0';
+    status[strcspn(status, "\n")] = '\0';
 
-	strncpy(stext, status, sizeof(stext));
-	drawbars();
+    strncpy(stext, status, sizeof(stext));
+    drawbars();
 
-	return 0;
+    return 0;
 }
+
+static int bar_pipe[2];
+
+void
+spawnbar(void)
+{
+    if (pipe(bar_pipe) == -1)
+        die("Failed to create pipe");
+
+    pid_t pid = fork();
+    if (pid == -1)
+        die("Failed to fork");
+
+    if (pid == 0) { 
+        close(bar_pipe[0]);  
+        dup2(bar_pipe[1], STDOUT_FILENO);
+        close(bar_pipe[1]);
+
+        execlp("sh", "sh", "-c", barshscript, NULL);
+        die("execlp failed"); 
+    }
+
+    close(bar_pipe[1]); 
+}
+
+
+void
+setupstatus(void)
+{
+    spawnbar();
+
+    status_event_source = wl_event_loop_add_fd(event_loop, bar_pipe[0],
+        WL_EVENT_READABLE, statusin, NULL);
+
+    if (!status_event_source)
+        die("Failed to add status event source");
+}
+
 
 void
 tag(const Arg *arg)
@@ -3978,6 +4016,7 @@ main(int argc, char *argv[])
 	if (!getenv("XDG_RUNTIME_DIR"))
 		die("XDG_RUNTIME_DIR must be set");
 	setup();
+	setupstatus();
 	run(startup_cmd);
 	cleanup();
 	return EXIT_SUCCESS;
