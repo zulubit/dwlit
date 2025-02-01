@@ -42,17 +42,26 @@ static int log_level = WLR_ERROR;
 
 /* Set environmental variables */
 static const Env envs[] = {
-	/* variable                  value */
 	{ "XDG_CURRENT_DESKTOP",    "wlroots" },
 	{ "GTK_THEME",              "Nordic" },
 	{ "GTK2_RC_FILES",          "~/.themes/Nordic/gtk-2.0/gtkrc" },
+	{ "GTK3_THEME",             "Nordic" },
+	{ "GTK_ICON_THEME_NAME", "Papirus-Dark" },
 	{ "ELM_DISPLAY",            "wl" },
 	{ "SDL_VIDEODRIVER",        "wayland" },
 	{ "QT_QPA_PLATFORM",        "wayland-egl" },
-	{ "XDG_SESSION_TYPE",       "xwayland" },
+	{ "XDG_SESSION_TYPE",       "wayland" },
 	{ "MOZ_ENABLE_WAYLAND",     "1" },
 	{ "GDK_BACKEND",            "wayland" },
 	{ "HANDLE_POWER_KEY",       "ignore" },
+	{ "XCURSOR_THEME",          "Banana" },
+	{ "XCURSOR_SIZE",           "24" },
+	{ "WLR_NO_HARDWARE_CURSORS","1" },
+	{ "XDG_ICON_THEME",         "Papirus-Dark" },
+	{ "GTK_USE_PORTAL",         "1" },
+	{ "QT_STYLE_OVERRIDE",      "adwaita-dark" },
+	{ "QT_QPA_PLATFORMTHEME",   "qt5ct" },
+	{ "ELECTRON_OZONE_PLATFORM_HINT", "wayland" },
 };
 
 /* Autostart */
@@ -63,7 +72,7 @@ static const char *const autostart[] = {
     /*"pipewire", NULL, // Can be run directly*/
     /*"wireplumber", NULL, // Can be run directly*/
     /*"pipewire-pulse", NULL, // Can be run directly*/
-    "lxpolkit", NULL, // Can be run directly
+    /*"lxpolkit", NULL, // Can be run directly*/
     NULL /* terminate */
 };
 
