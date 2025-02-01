@@ -6,31 +6,31 @@ interval=0
 
 cpu() {
   cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
-  echo "CPU $cpu_val"
+  echo "^bg(5e81ac) CPU ^bg() $cpu_val"
 }
 
 battery() {
   get_capacity="$(cat /sys/class/power_supply/BAT0/capacity)"
-  echo " $get_capacity"
+  echo "^bg(5e81ac)  ^bg() $get_capacity"
 }
 
 brightness() {
-  echo " $(cat /sys/class/backlight/*/brightness)"
+  echo "^bg(5e81ac)  ^bg() $(cat /sys/class/backlight/*/brightness)"
 }
 
 mem() {
-  echo " $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
+  echo "^bg(5e81ac)  ^bg() $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
 wlan() {
   case "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" in
-    up) echo "󰤨 Connected" ;;
-    down) echo "󰤭 Disconnected" ;;
+    up) echo "^bg(5e81ac) 󰤨 ^bg() Connected" ;;
+    down) echo "^bg(bf616a) 󰤭 ^bg() Disconnected" ;;
   esac
 }
 
 clock() {
-  echo "󱑆 $(date '+%d %B %H:%M')"
+  echo "^bg(5e81ac) 󱑆 ^bg() $(date '+%d %B %H:%M')"
 }
 
 while true; do
@@ -38,7 +38,7 @@ while true; do
   interval=$((interval + 1))
 
   # Collecting all outputs into one string
-  output="$(battery) $(brightness) $(cpu) $(mem) $(wlan) $(clock)"
+  output="$(battery) $(brightness) $(cpu) $(mem) $(wlan) $(clock) "
   
   # Output the string to the bar
   echo "$output"

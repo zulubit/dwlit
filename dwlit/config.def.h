@@ -30,7 +30,7 @@ enum Direction { DIR_LEFT, DIR_RIGHT, DIR_UP, DIR_DOWN };
 static uint32_t colors[][3]                = {
     /*               fg          bg          border    */
     [SchemeNorm] = { 0xe5e9f0ff, 0x2e344080, 0x4c566aff },  // Green text, dark gray with 50% transparency, bluish border
-    [SchemeSel]  = { 0xe5e9f0ff, 0x5e81ac80, 0xd8dee9b3 },  // Nord light gray, lighter gray with 50% transparency, matching border
+    [SchemeSel]  = { 0xe5e9f0ff, 0x5e81acff, 0xd8dee9b3 },  // Nord light gray, lighter gray with 50% transparency, matching border
     [SchemeUrg]  = { 0xe5e9f0ff, 0x2e3440b3, 0xd08770ff },  // Nord light gray, dark gray with 70% transparency, orange border for urgent
 };
 
@@ -54,7 +54,7 @@ static const Env envs[] = {
 	{ "MOZ_ENABLE_WAYLAND",     "1" },
 	{ "GDK_BACKEND",            "wayland" },
 	{ "HANDLE_POWER_KEY",       "ignore" },
-	{ "XCURSOR_THEME",          "Banana" },
+	/*{ "XCURSOR_THEME",          "Banana" },*/
 	{ "XCURSOR_SIZE",           "24" },
 	{ "WLR_NO_HARDWARE_CURSORS","1" },
 	{ "GTK_USE_PORTAL",         "1" },
