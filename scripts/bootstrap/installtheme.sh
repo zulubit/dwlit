@@ -3,13 +3,11 @@
 # Define URLs for the assets
 NORDIC_URL="https://github.com/EliverLara/Nordic/releases/download/v2.2.0/Nordic.tar.xz"
 HACK_URL="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip"
-PAPIRUS_INSTALL_SCRIPT="https://git.io/papirus-icon-theme-install"
 BANANA_CURSOR_URL="https://github.com/ful1e5/banana-cursor/releases/download/v2.0.0/Banana.tar.xz"
 
 # Define the destination directories
 THEME_DIR="$HOME/.themes/Nordic"
 FONT_DIR="$HOME/.fonts"
-ICON_DIR="$HOME/.icons"
 CURSOR_DIR="$HOME/.icons/Banana"
 TMP_DIR="/tmp/theme_install"
 
@@ -40,11 +38,6 @@ echo "Extracting Hack fonts to $FONT_DIR..."
 unzip -o "$HACK_ARCHIVE" -d "$FONT_DIR"
 fc-cache -fv
 echo "Hack fonts installed successfully to $FONT_DIR!"
-
-# Install Papirus Icon Theme via the Official Script
-echo "Installing Papirus icon theme..."
-wget -qO- "$PAPIRUS_INSTALL_SCRIPT" | env DESTDIR="$ICON_DIR" sh
-echo "Papirus icon theme installed successfully to $ICON_DIR!"
 
 # Download and extract Banana Cursor
 BANANA_CURSOR_ARCHIVE="$TMP_DIR/Banana.tar.xz"

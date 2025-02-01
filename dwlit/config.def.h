@@ -57,10 +57,7 @@ static const Env envs[] = {
 	{ "XCURSOR_THEME",          "Banana" },
 	{ "XCURSOR_SIZE",           "24" },
 	{ "WLR_NO_HARDWARE_CURSORS","1" },
-	{ "XDG_ICON_THEME",         "Papirus-Dark" },
 	{ "GTK_USE_PORTAL",         "1" },
-	{ "QT_STYLE_OVERRIDE",      "adwaita-dark" },
-	{ "QT_QPA_PLATFORMTHEME",   "qt5ct" },
 	{ "ELECTRON_OZONE_PLATFORM_HINT", "wayland" },
 };
 
