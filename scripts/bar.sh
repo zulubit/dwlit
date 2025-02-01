@@ -33,12 +33,24 @@ clock() {
   echo "^bg(5e81ac) 󱑆 ^bg() $(date '+%d %B %H:%M')"
 }
 
+volume() {
+  vol_output=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+  vol=$(echo "$vol_output" | awk '{print $2 * 100}' | cut -d. -f1)
+
+  if echo "$vol_output" | grep -q "\[MUTED\]"; then
+    echo "^bg(bf616a)  ^bg() Muted"
+  else
+    echo "^bg(5e81ac)  ^bg() $vol%"
+  fi
+}
+
+
 while true; do
   [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ]
   interval=$((interval + 1))
 
   # Collecting all outputs into one string
-  output="$(battery) $(brightness) $(cpu) $(mem) $(wlan) $(clock) "
+  output="$(battery) $(volume) $(brightness) $(cpu) $(mem) $(wlan) $(clock) "
   
   # Output the string to the bar
   echo "$output"
