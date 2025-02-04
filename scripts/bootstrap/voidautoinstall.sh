@@ -25,19 +25,14 @@ sudo ln -s /etc/sv/elogind /var/service || error_exit "Failed to create elogind 
 sudo ln -s /etc/sv/bluetoothd /var/service || error_exit "Failed to create bluetoothd symlink."
 sudo ln -s /etc/sv/polkitd /var/service || error_exit "Failed to create polkitd symlink."
 
-# Build dwlit
-sudo make install clean || error_exit "Failed to build and install dwlit."
-
 # Make bar.sh and start.sh executable
 chmod +x ~/dwlit/scripts/bar.sh || error_exit "Failed to make bar.sh executable."
 chmod +x ~/dwlit/scripts/power.sh || error_exit "Failed to make power.sh executable."
-chmod +x start.sh || error_exit "Failed to make start.sh executable."
-chmod +x rebuild.sh || error_exit "Failed to make rebuild.sh executable."
 
-# Install themes (add the installtheme.sh script)
-chmod +x installtheme.sh || error_exit "Failed to make installtheme.sh executable."
-./installtheme.sh || error_exit "Failed to run installtheme.sh."
+cd ~/dwlit/dwlit || error_exit "Failed to change directories."
+chmod +x rebuild.sh || error_exit "Failed to make rebuild.sh executable."
+sudo ./rebuild.sh || error_exit "Failed to build dwlit"
 
 # Completion message
-echo "You should 'sudo reboot' your system, then you can use './dwlit/start' after logging back in. you can start a terminal using windows_log + return when in a session and run 'ice' to get some usefull info. Your network connection is disabled, use 'nmtui' in the terminal to reconnect"
+echo "You should 'sudo reboot' your system."
 
