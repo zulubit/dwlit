@@ -66,10 +66,10 @@ static const char *const autostart[] = {
     "sh", "-c", "sleep 1; light -S 50", NULL, // Requires `sh -c` for proper argument parsing
     "sh", "-c", "swaybg -i ~/dwlit/Background/bg.jpg -m fill", NULL, // Requires `sh -c` for tilde expansion
     "sh", "-c", "mako --background-color '#2E3440' --text-color '#ECEFF4' --border-color '#BF616A' --border-size 2 --font 'Hack Nerd Font Mono 12' --icons 1 --max-icon-size 64", NULL,
-    /*"pipewire", NULL, // Can be run directly*/
-    /*"wireplumber", NULL, // Can be run directly*/
-    /*"pipewire-pulse", NULL, // Can be run directly*/
-    /*"lxpolkit", NULL, // Can be run directly*/
+    "pipewire", NULL, // Can be run directly
+    "wireplumber", NULL, // Can be run directly
+    "pipewire-pulse", NULL, // Can be run directly
+    "lxpolkit", NULL, // Can be run directly
     NULL /* terminate */
 };
 

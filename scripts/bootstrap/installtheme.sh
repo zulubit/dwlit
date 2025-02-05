@@ -8,7 +8,7 @@ BANANA_CURSOR_URL="https://github.com/ful1e5/banana-cursor/releases/download/v2.
 # Define the destination directories
 THEME_DIR="$HOME/.themes/Nordic"
 FONT_DIR="$HOME/.fonts"
-CURSOR_DIR="$HOME/.icons/Banana"
+CURSOR_DIR="$HOME/.local/share/icons/Banana"
 TMP_DIR="/tmp/theme_install"
 
 # Create a temporary directory for downloads
@@ -49,5 +49,7 @@ echo "Banana cursor theme installed successfully to $CURSOR_DIR!"
 
 # Cleanup
 rm -rf "$TMP_DIR"
+rm -rf "$HOME/.cache"
+# sudo ln -s ~/.local/share/icons/Banana ~/.local/share/icons/default
 echo "Installation completed!"
 
