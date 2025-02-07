@@ -30,7 +30,6 @@ sudo rm -f /var/service/wpa_supplicant || error_exit "Failed to remove wpa_suppl
 # Create correct symlinks in /var/service
 sudo ln -s /etc/sv/NetworkManager /var/service || error_exit "Failed to create NetworkManager symlink."
 sudo ln -s /etc/sv/dbus /var/service || error_exit "Failed to create dbus symlink."
-sudo ln -s /etc/sv/elogind /var/service || error_exit "Failed to create elogind symlink."
 sudo ln -s /etc/sv/bluetoothd /var/service || error_exit "Failed to create bluetoothd symlink."
 sudo ln -s /etc/sv/polkitd /var/service || error_exit "Failed to create polkitd symlink."
 
