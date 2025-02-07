@@ -1,45 +1,38 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+# Define Nord colors
+NORD0="2E3440"   # Polar Night (dark background)
+NORD4="ECEFF4"   # Snow Storm (light text)
+NORD11="BF616A"  # Aurora Red (accent color)
 
 # Define menu options
-options="Lock\nSuspend\nHibernate\nReboot\nShutdown\nLogout"
+options=(
+    "Lock"
+    "Suspend"
+    "Hibernate" 
+    "Reboot"
+    "Shutdown"
+    "Logout"
+)
 
-# Pipe options to wmenu and get the user's selection
-choice=$(echo "$options" | wmenu -b -i \
-    -p "What do you want to do? " \
-    -f "Nerd 16" \
-    -N "2E3440" -n "E5E9F0" \
-    -M "A3BE8C" -m "2E3440" \
-    -S "A3BE8C" -s "2E3440")
+# Get user selection - FIXED LINE CONTINUATION
+choice=$(printf "%s\n" "${options[@]}" | wmenu -i -b \
+    -p "Power Menu: " \
+    -f "Hack Nerd Font Mono 16px" \
+    -N "$NORD0" -n "$NORD4" \
+    -M "$NORD11" -m "$NORD0" \
+    -S "$NORD11" -s "$NORD0")
 
 # Define swaylock command
-SWAYLOCK="swaylock --color 2E3440f8 --ring-color A3BE8C --text-color 2E3440"
+SWAYLOCK="swaylock --color ${NORD0}ff --ring-color $NORD11 --text-color $NORD4"
 
-# Handle the choice
-case $choice in
-    Lock)
-        $SWAYLOCK
-        ;;
-    Suspend)
-        $SWAYLOCK &  # Lock the screen in the background
-        sleep 1      # Give swaylock time to start before suspending
-        loginctl suspend
-        ;;
-    Hibernate)
-        $SWAYLOCK &  # Lock the screen in the background
-        sleep 1      # Give swaylock time to start before hibernating
-        loginctl hibernate
-        ;;
-    Reboot)
-        loginctl reboot
-        ;;
-    Shutdown)
-        loginctl poweroff
-        ;;
-    Logout)
-        pkill -KILL -u "$USER"
-        ;;
-    *)
-        echo "No valid option selected."
-        ;;
+# Handle selection
+case "$choice" in
+    "Lock") $SWAYLOCK ;;
+    "Suspend") $SWAYLOCK & sleep 1; loginctl suspend ;;
+    "Hibernate") $SWAYLOCK & sleep 1; loginctl hibernate ;;
+    "Reboot") loginctl reboot ;;
+    "Shutdown") loginctl poweroff ;;
+    "Logout") pkill -KILL -u "$USER" ;;
+    *) echo "Invalid selection" >&2; exit 1 ;;
 esac
-

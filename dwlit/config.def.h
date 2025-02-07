@@ -46,17 +46,12 @@ static const Env envs[] = {
 	{ "GTK_THEME",              "Nordic" },
 	{ "GTK2_RC_FILES",          "~/.themes/Nordic/gtk-2.0/gtkrc" },
 	{ "GTK3_THEME",             "Nordic" },
-	{ "GTK_ICON_THEME_NAME", "Papirus-Dark" },
 	{ "ELM_DISPLAY",            "wl" },
 	{ "SDL_VIDEODRIVER",        "wayland" },
 	{ "QT_QPA_PLATFORM",        "wayland-egl" },
 	{ "XDG_SESSION_TYPE",       "wayland" },
 	{ "MOZ_ENABLE_WAYLAND",     "1" },
 	{ "GDK_BACKEND",            "wayland" },
-	{ "HANDLE_POWER_KEY",       "ignore" },
-	/*{ "XCURSOR_THEME",          "Banana" },*/
-	{ "XCURSOR_SIZE",           "24" },
-	{ "WLR_NO_HARDWARE_CURSORS","1" },
 	{ "GTK_USE_PORTAL",         "1" },
 	{ "ELECTRON_OZONE_PLATFORM_HINT", "wayland" },
 };
@@ -67,8 +62,6 @@ static const char *const autostart[] = {
     "sh", "-c", "swaybg -i ~/dwlit/Background/bg.jpg -m fill", NULL, // Requires `sh -c` for tilde expansion
     "sh", "-c", "mako --background-color '#2E3440' --text-color '#ECEFF4' --border-color '#BF616A' --border-size 2 --font 'Hack Nerd Font Mono 12' --icons 1 --max-icon-size 64", NULL,
     "pipewire", NULL, // Can be run directly
-    "wireplumber", NULL, // Can be run directly
-    "pipewire-pulse", NULL, // Can be run directly
     "lxpolkit", NULL, // Can be run directly
     NULL /* terminate */
 };
@@ -102,7 +95,7 @@ static const MonitorRule monrules[] = {
 	{ "eDP-1",    0.5f,  1,      2,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
 	*/
 	/* defaults */
-	{ NULL,       0.55f, 1,      1,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
+	{ NULL,       0.55f, 1,      1.25,    &layouts[0], WL_OUTPUT_TRANSFORM_NORMAL,   -1,  -1 },
 };
 
 /* keyboard */
@@ -190,14 +183,11 @@ static const char *menucmd[] = {
     NULL
 };
 
-static const char *swaylockcmd[] = {
-    "swaylock",
-    "--color", "2E3440f8",        /* Background color with transparency (f8 = 97% opaque) */
-    "--ring-color", "A3BE8C",     /* Ring color (Soft cyan) */
-    "--text-color", "2E3440",     /* Text color (Light grey) */
+static const char *powercmd[] = {
+    "/bin/sh", "-c",
+    "~/dwlit/scripts/./power.sh",
     NULL
 };
-
 
 static const char *upvol[] = {
     "/bin/sh", "-c",
@@ -236,7 +226,7 @@ static const Key keys[] = {
 	/* modifier                  key                 function        argument */
 	{ MODKEY,                    XKB_KEY_p,          spawn,          {.v = menucmd} },
 	{ MODKEY,		     XKB_KEY_Return,     spawn,          {.v = termcmd} },
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_BackSpace,  spawn,          {.v = swaylockcmd} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_BackSpace,  spawn,          {.v = powercmd} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_S,     	 spawn,          {.v = recordcmd} },
 	{ MODKEY,                    XKB_KEY_s,     	 spawn,          {.v = screenshotcmd} },
 	{ MODKEY,                    XKB_KEY_b,          togglebar,      {0} },
@@ -246,6 +236,9 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_d,          incnmaster,     {.i = -1} },
 	{ MODKEY,                    XKB_KEY_h,          setmfact,       {.f = -0.05f} },
 	{ MODKEY,                    XKB_KEY_l,          setmfact,       {.f = +0.05f} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_H,          setcfact,       {.f = +0.25f} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_L,          setcfact,       {.f = -0.25f} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_K,          setcfact,       {.f = 0.0f} },
 	{ MODKEY,                    XKB_KEY_z,          zoom,           {0} },
 	{ MODKEY,                    XKB_KEY_Tab,        view,           {0} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,          killclient,     {0} },

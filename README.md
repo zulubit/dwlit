@@ -11,7 +11,7 @@ A script is included that fires all the build commands:
 If you havent already, clone the repository, install the dependencies and:
 
 ```bash
-cd ~/dwlit
+cd ~/dwlit/dwlit
 ./rebuild.sh
 ```
 
@@ -24,23 +24,12 @@ cd ~/dwlit
 sudo make install clean
 ```
 
-## Starting:
-
-there is a script you should use to start dwlit
-
-```bash
-cd
-./dwlit/start.sh
-```
-
-before you start you should make sure all the scripts in **./scripts** are executable
-
 ## Apply theme and fonts
 
 There is a script provided to install the *Nord GTK theme* and *Hack Nerd Font* 
 
 ```bash
-cd ~/dwlit
+cd ~/dwlit/scripts/bootstrap
 chmod +x installtheme.sh
 ./installtheme.sh
 ```
@@ -59,33 +48,28 @@ You should install **openssl** and **git** packages,
 
 ```bash
 git clone https://github.com/zulubit/dwlit.git
-cd dwlit
+cd dwlit/scripts/bootstrap
 chmod +x voidautoinstall.sh
+./voidautoinstall.sh
 sudo reboot
 ```
 
-you'll probably be asked fo your users password a couple of times so pay some attention.
+you'll probably be asked fo your users password so pay some attention.
 
 ## Importand bindings:
 
 - **logo + enter** - open terminal
 - **logo + p** - open menu
 - **logo + shift + Q** - kill focused
+- **logo + shift + E** - exit
 
-the rest shloud be looked up in **~/dwlit/config.def.h**. It's advisable to be familiar with the entire file.
-
-## Misc:
-
-To get a better flatpak experience you should probably install **Flatseal** from flathub and enable wayland support globally
-
-To make use of the power button binding you should disable the default button behaviour in **logind.conf** bt setting "HandlePowerKey" to "ignore"
+the rest shloud be looked up in **~/dwlit/dwlit/config.def.h**. It's advisable to be familiar with the entire file.
 
 ## Dependencies:
 
 References copied from:
 
 - [dwl](https://codeberg.org/dwl/dwl)
-- [dwl bar (dwlb)](https://github.com/kolunmi/dwlb)
  
 ### Building dwl
 ### **dwl branch 0.7 and releases based upon 0.7 build against [wlroots] 0.18**
@@ -97,8 +81,6 @@ dwl has the following dependencies:
 - xkbcommon
 - wayland-protocols (compile-time only)
 - pkg-config (compile-time only)
-
-dwl has the following additional dependencies if XWayland support is enabled:
 - libxcb
 - libxcb-wm
 - wlroots (compiled with X11 support)
@@ -132,17 +114,17 @@ base-devel base-system make gcc git curl wget elogind light
 
 #### Wayland and Related
 ```bash
-swaylock swaybg wl-clipboard wlroots-devel wlroots0.18 wlroots0.18-devel wlroots0.18-devel
+swaylock swaybg wl-clipboard
 ```
 
 #### Audio and Video
 ```bash
-pipewire pipewire-pulse pavucontrol sof-firmware sof-tools
+pipewire pipewire-pulse pavucontrol
 ```
 
 #### Fonts and XWayland Support
 ```bash
-dejaVu-fonts-ttf xorg-server-xwayland qt5-wayland qt6-wayland
+xorg-server-xwayland qt5-wayland qt6-wayland
 ```
 
 #### Other Tools and Libraries
@@ -151,3 +133,34 @@ polkit polkit-elogind lxsession xdg-desktop-portal-wlr xdg-desktop-portal-gtk fc
 ```
 
 Install these. The reference names of packages are from *Void (Linux)*, if you're using a different distro, these packages are surely available so make sure to look up their names if instaling referenced ones fails.
+
+## Void extras
+
+You'll need to setup **pipewire, wireplumber and pipewire-pulse** https://docs.voidlinux.org/config/media/pipewire.html
+
+```
+sudo mkdir -p /etc/pipewire/pipewire.conf.d
+sudo ln -s /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
+sudo mkdir -p /etc/pipewire/pipewire.conf.d
+sudo ln -s /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/
+```
+
+You should probably also install **sof-firmware** and **sof-tools** and reboot to make your device in/outpusts discoverable
+
+If you're on a laptop you should probably install **tlp** and enable it's service
+
+### Banana cursor
+
+A couple of things have to be done to make it work.
+
+1.
+
+```bash
+gsettings set org.gnome.desktop.interface cursor-theme cursor_theme_name
+```
+
+2.
+
+```bash
+sudo cp ~/.local/share/icons/Banana ~/.local/share/icons/default
+```
