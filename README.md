@@ -149,6 +149,14 @@ You should probably also install **sof-firmware** and **sof-tools** and reboot t
 
 If you're on a laptop you should probably install **tlp** and enable it's service
 
+### Flatpak
+
+You shoud run the foolowing command after installing flatpaks for them to show up in wmenu:
+
+```bash
+sudo ln -s /var/lib/flatpak/exports/bin/* /usr/bin
+```
+
 ### Banana cursor
 
 A couple of things have to be done to make it work.
