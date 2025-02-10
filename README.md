@@ -157,6 +157,12 @@ You shoud run the foolowing command after installing flatpaks for them to show u
 sudo ln -s /var/lib/flatpak/exports/bin/* /usr/bin
 ```
 
+### Bluetooth audio
+
+```bash
+sudo xbps-install libspa-bluetooth
+```
+
 ### Banana cursor
 
 A couple of things have to be done to make it work.
