@@ -42,7 +42,7 @@ static int log_level = WLR_ERROR;
 
 /* Set environmental variables */
 static const Env envs[] = {
-	{ "XDG_CURRENT_DESKTOP",    "wlroots" },
+	/*{ "XDG_CURRENT_DESKTOP",    "wlroots" },*/
 	{ "GTK_THEME",              "Nordic" },
 	{ "GTK2_RC_FILES",          "~/.themes/Nordic/gtk-2.0/gtkrc" },
 	{ "GTK3_THEME",             "Nordic" },

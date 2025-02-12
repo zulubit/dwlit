@@ -129,7 +129,7 @@ xorg-server-xwayland qt5-wayland qt6-wayland
 
 #### Other Tools and Libraries
 ```bash
-polkit polkit-elogind lxsession xdg-desktop-portal-wlr xdg-desktop-portal-gtk fcft fcft-devel
+polkit polkit-elogind lxsession xdg-desktop-portal xdg-desktop-portal-wlr xdg-desktop-portal-gtk fcft fcft-devel
 ```
 
 Install these. The reference names of packages are from *Void (Linux)*, if you're using a different distro, these packages are surely available so make sure to look up their names if instaling referenced ones fails.
