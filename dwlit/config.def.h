@@ -202,6 +202,11 @@ static const char *downvol[] = {
     NULL
 };
 
+static const char *playpause[] = {
+    "playerctl", "play-pause",
+    NULL
+};
+
 static const char *mutevol[] = { "/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
 static const char *light_up[] = { "/usr/bin/light", "-A", "5", NULL };
 static const char *light_down[] = { "/usr/bin/light", "-U", "5", NULL };
@@ -281,7 +286,7 @@ static const Key keys[] = {
 	{0, XKB_KEY_XF86MonBrightnessUp, spawn, {.v = light_up}},     // Use XKB_KEY_XF86MonBrightnessUp
 	{0, XKB_KEY_XF86MonBrightnessDown, spawn, {.v = light_down}}, // Use XKB_KEY_XF86MonBrightnessDown
 	{0, XKB_KEY_XF86AudioMicMute, spawn, {.v = mutemic}},           // Use XKB_KEY_XF86AudioMicMute
-	{0, XKB_KEY_XF86PowerOff, spawn, {.v = (const char*[]){ "wlogout", NULL }} },	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
+	{0, XKB_KEY_XF86AudioPlay, spawn, {.v = playpause}},           
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
 	/* Ctrl-Alt-Fx is used to switch to another VT, if you don't know what a VT is
 	 * do not remove them.
