@@ -178,3 +178,7 @@ gsettings set org.gnome.desktop.interface cursor-theme cursor_theme_name
 ```bash
 sudo cp ~/.local/share/icons/Banana ~/.local/share/icons/default
 ```
+
+### Special key presses
+
+To identify the name of any special keys pressed you can use a utility called **wev**
