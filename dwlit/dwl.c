@@ -2047,19 +2047,25 @@ handlesig(int signo)
 }
 
 void
-incnmaster(const Arg *arg)
-{
-	unsigned int n = 0;
-	Client *c;
+incnmaster(const Arg *arg) {
+    unsigned int n = 0;
+    Client *c;
 
-	if (!arg || !selmon)
-		return;
-	wl_list_for_each(c, &clients, link)
-		if (VISIBLEON(c, selmon) && !c->isfloating && !c->isfullscreen)
-			n++;
-	selmon->nmaster = MIN(MAX(selmon->nmaster + arg->i, 0), n);
-	arrange(selmon);
+    if (!arg || !selmon)
+        return;
+
+    // Count visible clients
+    wl_list_for_each(c, &clients, link)
+        if (VISIBLEON(c, selmon) && !c->isfloating && !c->isfullscreen)
+            n++;
+
+    // Update nmaster and save it in Pertag
+    selmon->nmaster = MIN(MAX(selmon->nmaster + arg->i, 0), n);
+    selmon->pertag->nmasters[selmon->pertag->curtag] = selmon->nmaster; // Save change
+
+    arrange(selmon);
 }
+
 
 void
 incgaps(const Arg *arg)
