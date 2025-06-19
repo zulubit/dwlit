@@ -169,19 +169,25 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 static const char *termcmd[] = { "foot", "-f", "Hack Nerd Font:size=12", "-o", "include=/usr/share/foot/themes/nord", "-o", "colors.alpha=0.98", NULL };
 
 static const char *menucmd[] = {
-    "wmenu-run",
-    "-i",                 // Case-insensitive matching
-    "-b",                 // Case-insensitive matching
-    "-p", "Run: ",        // Prompt text "Run: "
-    "-f", "Nerd 12",      // Use the "Nerd" font at size 14
-    "-N", "2E3440",       // Normal background color (Nordic dark)
-    "-n", "E5E9F0",       // Normal foreground color (Nordic white)
-    "-M", "A3BE8C",       // Prompt background color (Nordic green)
-    "-m", "2E3440",       // Prompt foreground color (Nordic white)
-    "-S", "A3BE8C",       // Selection background color (Nordic green)
-    "-s", "2E3440",       // Selection foreground color (Nordic white)
+    "rofi",
+    "-show", "drun",
+    "-font", "Nerd Font Mono 12",
+    "-location", "0",
+    "-padding", "20",
+    "-lines", "6",
+    "-kb-cancel", "Escape,Control+g",
+    "-theme-str", "window { background-color: #2E3440; border-color: #81A1C1; }",
+    "-theme-str", "inputbar { children: [prompt, entry]; }",
+    "-theme-str", "prompt { text-color: #A3BE8C; }",
+    "-theme-str", "entry { placeholder: \"Run: \"; }",
+    "-theme-str", "listview { lines: 6; }",
+    "-theme-str", "element { background-color: #2E3440; text-color: #E5E9F0; }",
+    "-theme-str", "element selected { background-color: #A3BE8C; text-color: #2E3440; }",
+    "-theme-str", "element urgent { background-color: #BF616A; text-color: #E5E9F0; }",
+    "-theme-str", "element active { background-color: #3B4252; text-color: #A3BE8C; }",
     NULL
 };
+
 
 static const char *powercmd[] = {
     "/bin/sh", "-c",
