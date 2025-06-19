@@ -214,8 +214,8 @@ static const char *playpause[] = {
 };
 
 static const char *mutevol[] = { "/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
-static const char *light_up[] = { "/usr/bin/light", "-A", "5", NULL };
-static const char *light_down[] = { "/usr/bin/light", "-U", "5", NULL };
+static const char *light_up[] = { "/usr/bin/brightnessctl", "set", "+5%", NULL };
+static const char *light_down[] = { "/usr/bin/brightnessctl", "set", "5%-", NULL };
 static const char *mutemic[] = { "/usr/bin/wpctl", "set-mute", "@DEFAULT_AUDIO_SOURCE@", "toggle", NULL };
 /* For this to work ~/Pictures must exists */
 static const char *screenshotcmd[] = { 

@@ -24,8 +24,8 @@ mem() {
 
 wlan() {
   case "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" in
-    up) echo "^bg(5e81ac) 󰤨 ^bg() Connected" ;;
-    down) echo "^bg(bf616a) 󰤭 ^bg() Disconnected" ;;
+    up) echo "^bg(5e81ac) 󰤨 ^bg() up" ;;
+  down) echo "^bg(bf616a) 󰤭 ^bg() Down" ;;
   esac
 }
 
