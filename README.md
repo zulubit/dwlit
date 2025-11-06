@@ -1,4 +1,4 @@
-# DWLit - a fork of DWL with a lot of extras by zulubit
+# DWLit - a fork of DWL with a lot of extras
 
 ![Screenshot](screenshot.png)
 
